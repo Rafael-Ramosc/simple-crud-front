@@ -63,10 +63,6 @@ const styles = {
     cursor: 'pointer',
   },
 
-  
-
-
-
 };
 
 
