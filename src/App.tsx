@@ -16,10 +16,56 @@ import { max } from "date-fns";
 
 const styles = {
 
-  mensagem_container: {
+  card_container: {
     maxwidth: '68rem',
     margin: 'auto',
-  }
+    backgroundColor: 'black',
+  },
+
+  mensage_container: {
+    margin: '2rem',
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))',
+    gap: '1rem',
+    gridTemplateRows: '1fr',
+  },
+
+  card_insert: {
+    padding: '1rem', 
+    minHeight: '18rem', 
+    backgroundColor: '#8ff205', 
+    borderRadius: '0.5rem', 
+    border: '1px solid #8ff205',
+    boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)', 
+    display: 'flex', 
+    flexDirection: 'column' as const,
+    alignItems: 'center',
+    justifyContent: 'center', 
+  },
+
+  card_button:{
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: '5rem', 
+    width: '5rem', 
+    border: '2px dashed black',
+    borderRadius: '9999px',
+    color: 'black', 
+    fontSize: '3rem',
+    cursor: 'pointer',
+  },
+  card_text: {
+    fontSize: '1.125rem',
+    fontWeight: '500', 
+    color: 'black', 
+    marginTop: '1.25rem',
+    cursor: 'pointer',
+  },
+
+  
+
+
 
 };
 
@@ -60,20 +106,20 @@ function AppContent() {
   }, [isLoading, isFetching]);
 
   return (
-    <div style={styles.mensagem_container}>
-      <div className="m-8 grid grid-cols-[repeat(auto-fill,_320px)] gap-7 grid-rows-[1fr]">
-        <div className="p-4 min-h-[18rem] bg-white rounded-lg border border-gray-200 shadow-md flex flex-col items-center justify-center">
+    <div style={styles.card_container}>
+      <div style={styles.mensage_container}>
+        <div style={styles.card_insert}>
           <div
             onClick={() => setOpenNoteModal(true)}
-            className="flex items-center justify-center h-20 w-20 border-2 border-dashed border-ct-blue-600 rounded-full text-ct-blue-600 text-5xl cursor-pointer"
+            style={styles.card_button}
           >
             <i className="bx bx-plus"></i>
           </div>
           <h4
             onClick={() => setOpenNoteModal(true)}
-            className="text-lg font-medium text-ct-blue-600 mt-5 cursor-pointer"
+            style={styles.card_text}
           >
-            Deixa uma mensagem para meu servidor!
+            Leave my server a message!
           </h4>
         </div>
         {/* Note Items */}
