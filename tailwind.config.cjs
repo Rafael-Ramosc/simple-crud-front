@@ -13,6 +13,7 @@ module.exports = {
         'ct-blue-600': '#e35def',
         'ct-blue-700': '#db34eb',
         'ct-yellow-600': '#f9d13e',
+        'ct-green-hacker': '#80e825',
       },
       fontFamily: {
         Poppins: ['Poppins, sans-serif'],

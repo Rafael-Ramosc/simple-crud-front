@@ -69,57 +69,25 @@ const NoteItem: FC<NoteItemProps> = ({ note }) => {
   };
   return (
     <>
-      <div className="p-4 bg-white rounded-lg border border-gray-200 shadow-md flex flex-col justify-between overflow-hidden">
+      <div className="p-4 bg-black rounded-lg border border-black shadow-md flex flex-col justify-between overflow-hidden">
         <div className="details">
-          <h4 className="mb-2 pb-2 text-2xl font-semibold tracking-tight text-gray-900">
+          <h4 className="mb-2 pb-2 text-2xl font-semibold tracking-tight text-ct-green-hacker">
+            $User:&nbsp;
             {note.title.length > 40
               ? note.title.substring(0, 40) + "..."
               : note.title}
           </h4>
-          <p className="mb-3 font-normal text-ct-dark-200">
+          <p className="mb-3 font-normal text-ct-green-hacker">
+          $Message:&nbsp;
             {note.content.length > 210
               ? note.content.substring(0, 210) + "..."
               : note.content}
           </p>
         </div>
-        <div className="relative border-t border-slate-300 flex justify-between items-center">
-          <span className="text-ct-dark-100 text-sm">
+        <div className="relative border-t border-black flex justify-between items-center">
+          <span className="text-ct-green-hacker text-sm">
             {format(parseISO(String(note.createdAt)), "PPP")}
           </span>
-          <div
-            onClick={() => setOpenSettings(!openSettings)}
-            className="text-ct-dark-100 text-lg cursor-pointer"
-          >
-            <i className="bx bx-dots-horizontal-rounded"></i>
-          </div>
-          <div
-            id={`settings-dropdown-${note.id}`}
-            className={twMerge(
-              `absolute right-0 bottom-3 z-10 w-28 text-base list-none bg-white rounded divide-y divide-gray-100 shadow`,
-              `${openSettings ? "block" : "hidden"}`
-            )}
-          >
-            <ul className="py-1" aria-labelledby="dropdownButton">
-              <li
-                onClick={() => {
-                  setOpenSettings(false);
-                  setOpenNoteModal(true);
-                }}
-                className="py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
-              >
-                <i className="bx bx-pencil"></i> Edit
-              </li>
-              <li
-                onClick={() => {
-                  setOpenSettings(false);
-                  onDeleteHandler(note.id);
-                }}
-                className="py-2 px-4 text-sm text-red-600 hover:bg-gray-100 cursor-pointer"
-              >
-                <i className="bx bx-trash"></i> Delete
-              </li>
-            </ul>
-          </div>
         </div>
       </div>
       <NoteModal

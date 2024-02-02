@@ -19,7 +19,7 @@ const styles = {
   card_container: {
     maxwidth: '68rem',
     margin: 'auto',
-    backgroundColor: 'black',
+    backgroundColor: '#2b3645',
   },
 
   mensage_container: {
@@ -33,9 +33,9 @@ const styles = {
   card_insert: {
     padding: '1rem', 
     minHeight: '18rem', 
-    backgroundColor: '#8ff205', 
+    backgroundColor: 'white', 
     borderRadius: '0.5rem', 
-    border: '1px solid #8ff205',
+    border: '1px solid black',
     boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)', 
     display: 'flex', 
     flexDirection: 'column' as const,
