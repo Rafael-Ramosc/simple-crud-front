@@ -84,7 +84,7 @@ const CreateMessage: FC<ICreateMessageProps> = ({ setOpenMessageModal }) => {
     },
     onSuccess(data) {
       queryClient.invalidateQueries(["getMessages"]);
-      setOpeMessageModal(false);
+      setOpenMessageModal(false);
       NProgress.done();
       toast("Message created successfully", {
         type: "success",
@@ -128,17 +128,17 @@ const CreateMessage: FC<ICreateMessageProps> = ({ setOpenMessageModal }) => {
           <input
             className={twMerge(
               `appearance-none border border-gray-400 rounded w-full py-3 px-3 text-gray-700 mb-2  leading-tight focus:outline-none bg-slate-300`,
-              `${errors["title"] && "border-red-500"}`
+              `${errors["nome"] && "border-red-500"}`
             )}
-            {...methods.register("title")}
+            {...methods.register("nome")}
           />
           <p
             className={twMerge(
               `text-red-500 text-xs italic mb-2 invisible`,
-              `${errors["title"] && "visible"}`
+              `${errors["nome"] && "visible"}`
             )}
           >
-            {errors["title"]?.message as string}
+            {errors["nome"]?.message as string}
           </p>
         </div>
         <div className="mb-2">
@@ -148,15 +148,15 @@ const CreateMessage: FC<ICreateMessageProps> = ({ setOpenMessageModal }) => {
           <textarea
             className={twMerge(
               `appearance-none border border-gray-400 rounded w-full py-3 px-3 text-gray-700 mb-2 leading-tight focus:outline-none bg-slate-300`,
-              `${errors.content && "border-red-500"}`
+              `${errors.mensagem && "border-red-500"}`
             )}
             rows={6}
-            {...register("content")}
+            {...register("mensagem")}
           />
           <p
             className={twMerge(
               `text-red-500 text-xs italic mb-2`,
-              `${errors.content ? "visible" : "invisible"}`
+              `${errors.mensagem ? "visible" : "invisible"}`
             )}
           >
             {errors.mensagem && errors.mensagem.message}
