@@ -7,10 +7,10 @@ import {
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { useEffect, useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
-import { getNotesFn } from "./api/noteApi";
-import NoteModal from "./components/note.modal";
-import CreateNote from "./components/notes/create.note";
-import NoteItem from "./components/notes/note.component";
+import { getMessagesFn } from "./api/noteApi";
+import NoteModal from "./components/message.modal";
+import CreateNote from "./components/messages/create.note";
+import MessageItem from "./components/messages/note.component";
 import NProgress from "nprogress";
 import { max } from "date-fns";
 
@@ -67,17 +67,17 @@ const styles = {
 
 
 function AppContent() {
-  const [openNoteModal, setOpenNoteModal] = useState(false);
+  const [openMessageModal, setOpenMessageModal] = useState(false);
 
   const {
-    data: notes,
+    data: messages,
     isLoading,
     isFetching,
   } = useQuery({
-    queryKey: ["getNotes"],
-    queryFn: () => getNotesFn(),
+    queryKey: ["getMessages"],
+    queryFn: () => getMessagesFn(),
     staleTime: 5 * 1000,
-    select: (data) => data.notes,
+    select: (data) => data.messages,
     onSuccess() {
       NProgress.done();
     },
@@ -106,13 +106,13 @@ function AppContent() {
       <div style={styles.mensage_container}>
         <div style={styles.card_insert}>
           <div
-            onClick={() => setOpenNoteModal(true)}
+            onClick={() => setOpenMessageModal(true)}
             style={styles.card_button}
           >
             <i className="bx bx-plus"></i>
           </div>
           <h4
-            onClick={() => setOpenNoteModal(true)}
+            onClick={() => setOpenMessageModal(true)}
             style={styles.card_text}
           >
             Leave my server a message!
@@ -120,16 +120,16 @@ function AppContent() {
         </div>
         {/* Note Items */}
 
-        {notes?.map((note) => (
-          <NoteItem key={note.id} note={note} />
+        {messages?.map((message) => (
+          <MessageItem key={message.id} message={message} />
         ))}
 
         {/* Create Note Modal */}
         <NoteModal
-          openNoteModal={openNoteModal}
-          setOpenNoteModal={setOpenNoteModal}
+          openMessageModal={openMessageModal}
+          setOpenMessageModal={setOpenMessageModal}
         >
-          <CreateNote setOpenNoteModal={setOpenNoteModal} />
+          <CreateNote setOpenMessageModal={setOpenMessageModal} />
         </NoteModal>
       </div>
     </div>

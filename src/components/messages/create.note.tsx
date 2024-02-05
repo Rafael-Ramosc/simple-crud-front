@@ -6,7 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { LoadingButton } from "../LoadingButton";
 import { toast } from "react-toastify";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { createNoteFn } from "../../api/noteApi";
+import { createMessageFn } from "../../api/noteApi";
 import NProgress from "nprogress";
 
 const styles = {
@@ -53,20 +53,20 @@ const styles = {
   },
 };
 
-type ICreateNoteProps = {
-  setOpenNoteModal: (open: boolean) => void;
+type ICreateMessageProps = {
+  setOpenMessageModal: (open: boolean) => void;
 };
 
-const createNoteSchema = object({
-  title: string().min(1, "Title is required"),
-  content: string().min(1, "Content is required"),
+const createMessageSchema = object({
+  nome: string().min(1, "User name is required"),
+  message: string().min(1, "Message is required"),
 });
 
-export type CreateNoteInput = TypeOf<typeof createNoteSchema>;
+export type CreateNoteInput = TypeOf<typeof createMessageSchema>;
 
-const CreateNote: FC<ICreateNoteProps> = ({ setOpenNoteModal }) => {
-  const methods = useForm<CreateNoteInput>({
-    resolver: zodResolver(createNoteSchema),
+const CreateMessage: FC<ICreateMessageProps> = ({ setOpenMessageModal }) => {
+  const methods = useForm<CreateMessageInput>({
+    resolver: zodResolver(createMessageSchema),
   });
 
   const {
@@ -77,22 +77,22 @@ const CreateNote: FC<ICreateNoteProps> = ({ setOpenNoteModal }) => {
 
   const queryClient = useQueryClient();
 
-  const { mutate: createNote } = useMutation({
-    mutationFn: (note: CreateNoteInput) => createNoteFn(note),
+  const { mutate: createMessage } = useMutation({
+    mutationFn: (message: CreateMessageInput) => createMessageFn(message),
     onMutate() {
       NProgress.start();
     },
     onSuccess(data) {
-      queryClient.invalidateQueries(["getNotes"]);
-      setOpenNoteModal(false);
+      queryClient.invalidateQueries(["getMessages"]);
+      setOpeMessageModal(false);
       NProgress.done();
-      toast("Note created successfully", {
+      toast("Message created successfully", {
         type: "success",
         position: "top-right",
       });
     },
     onError(error: any) {
-      setOpenNoteModal(false);
+      setOpenMessageModal(false);
       NProgress.done();
       const resMessage =
         error.response.data.message ||
@@ -106,15 +106,15 @@ const CreateNote: FC<ICreateNoteProps> = ({ setOpenNoteModal }) => {
     },
   });
 
-  const onSubmitHandler: SubmitHandler<CreateNoteInput> = async (data) => {
-    createNote(data);
+  const onSubmitHandler: SubmitHandler<CreateMessageInput> = async (data) => {
+    createMessage(data);
   };
   return (
     <section style={styles.card_container}>
       <div style={styles.card_title_container}>
         <h2 style={styles.card_title}>Send a message</h2>
         <div
-          onClick={() => setOpenNoteModal(false)}
+          onClick={() => setOpenMessageModal(false)}
           style={styles.card_button}
         >
           <i className="bx bx-x"></i>
@@ -159,7 +159,7 @@ const CreateNote: FC<ICreateNoteProps> = ({ setOpenNoteModal }) => {
               `${errors.content ? "visible" : "invisible"}`
             )}
           >
-            {errors.content && errors.content.message}
+            {errors.mensagem && errors.mensagem.message}
           </p>
         </div>
         <LoadingButton loading={false}>Dispatch</LoadingButton>
@@ -168,4 +168,4 @@ const CreateNote: FC<ICreateNoteProps> = ({ setOpenNoteModal }) => {
   );
 };
 
-export default CreateNote;
+export default CreateMessage;

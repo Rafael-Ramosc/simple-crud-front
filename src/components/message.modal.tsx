@@ -1,23 +1,23 @@
 import ReactDom from "react-dom";
 import React, { FC } from "react";
 
-type INoteModal = {
-  openNoteModal: boolean;
-  setOpenNoteModal: (open: boolean) => void;
+type IMessageModal = {
+  openMessageModal: boolean;
+  setOpenMessageModal: (open: boolean) => void;
   children: React.ReactNode;
 };
 
-const NoteModal: FC<INoteModal> = ({
-  openNoteModal,
-  setOpenNoteModal,
+const MessageModal: FC<IMessageModal> = ({
+  openMessageModal,
+  setOpenMessageModal,
   children,
 }) => {
-  if (!openNoteModal) return null;
+  if (!openMessageModal) return null;
   return ReactDom.createPortal(
     <>
       <div
         className="fixed inset-0 bg-[rgba(0,0,0,.5)] z-[1000]"
-        onClick={() => setOpenNoteModal(false)}
+        onClick={() => setOpenMessageModal(false)}
       ></div>
       <div className="max-w-lg w-full rounded-md fixed top-0 lg:top-[10%] left-1/2 -translate-x-1/2 bg-slate-800 z-[1001] p-6">
         {children}
@@ -27,4 +27,4 @@ const NoteModal: FC<INoteModal> = ({
   );
 };
 
-export default NoteModal;
+export default MessageModal;
