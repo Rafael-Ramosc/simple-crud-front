@@ -17,15 +17,6 @@ export const createNoteFn = async (note: CreateNoteInput) => {
   return response.data;
 };
 
-export const updateNoteFn = async (noteId: string, note: UpdateNoteInput) => {
-  const response = await noteApi.patch<INoteResponse>(`notes/${noteId}`, note);
-  return response.data;
-};
-
-export const deleteNoteFn = async (noteId: string) => {
-  return noteApi.delete<null>(`notes/${noteId}`);
-};
-
 export const getSingleNoteFn = async (noteId: string) => {
   const response = await noteApi.get<INoteResponse>(`notes/${noteId}`);
   return response.data;
@@ -37,3 +28,5 @@ export const getNotesFn = async (page = 1, limit = 10) => {
   );
   return response.data;
 };
+
+

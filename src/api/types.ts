@@ -21,3 +21,11 @@ export type INotesResponse = {
   results: number;
   notes: INote[];
 };
+
+
+export type IMensagem = {
+  id: string;
+  nome: string;
+  mensagem: string;
+  data: Date;
+};
