@@ -1,5 +1,5 @@
 import axios from "axios";
-import { CreateNoteInput } from "../components/messages/create.note";
+import { CreateMessageInput } from "../components/messages/create.note";
 import { IMessage, IMessageResponse, IMessagesResponse } from "./types";
 
 const BASE_URL = "http://localhost:8000/api/";
@@ -9,7 +9,7 @@ export const noteApi = axios.create({
   withCredentials: true,
 });
 
-export const createMessageFn = async (note: CreateNoteInput) => {
+export const createMessageFn = async (message: CreateMessageInput) => {
   const response = await noteApi.post<IMessageResponse>("message/", message);
   return response.data;
 };

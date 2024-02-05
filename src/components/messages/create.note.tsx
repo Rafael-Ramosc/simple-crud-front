@@ -62,7 +62,7 @@ const createMessageSchema = object({
   message: string().min(1, "Message is required"),
 });
 
-export type CreateNoteInput = TypeOf<typeof createMessageSchema>;
+export type CreateMessageInput = TypeOf<typeof createMessageSchema>;
 
 const CreateMessage: FC<ICreateMessageProps> = ({ setOpenMessageModal }) => {
   const methods = useForm<CreateMessageInput>({
