@@ -4,7 +4,7 @@ import React, { FC } from "react";
 type IMessageModal = {
   openMessageModal: boolean;
   setOpenMessageModal: (open: boolean) => void;
-  children: React.ReactNode;
+  children?: React.ReactNode;
 };
 
 const MessageModal: FC<IMessageModal> = ({
@@ -23,7 +23,7 @@ const MessageModal: FC<IMessageModal> = ({
         {children}
       </div>
     </>,
-    document.getElementById("note-modal") as HTMLElement
+    document.getElementById("message-modal") as HTMLElement
   );
 };
 

@@ -59,7 +59,7 @@ type ICreateMessageProps = {
 
 const createMessageSchema = object({
   nome: string().min(1, "User name is required"),
-  message: string().min(1, "Message is required"),
+  mensagem: string().min(1, "Message is required"),
 });
 
 export type CreateMessageInput = TypeOf<typeof createMessageSchema>;
@@ -159,7 +159,7 @@ const CreateMessage: FC<ICreateMessageProps> = ({ setOpenMessageModal }) => {
               `${errors.mensagem ? "visible" : "invisible"}`
             )}
           >
-            {errors.mensagem && errors.mensagem.message}
+            {errors.mensagem?.message || ""}
           </p>
         </div>
         <LoadingButton loading={false}>Dispatch</LoadingButton>

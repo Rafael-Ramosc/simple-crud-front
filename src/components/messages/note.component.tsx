@@ -8,17 +8,17 @@ import NProgress from "nprogress";
 import { IMessage } from "../../api/types";
 
 type MessageItemProps = {
-  message: IMessage;
+  mensagem: IMessage;
 };
 
-const MessageItem: FC<MessageItemProps> = ({ message }) => {
+const MessageItem: FC<MessageItemProps> = ({ mensagem }) => {
   const [openSettings, setOpenSettings] = useState(false);
   const [openMessageModal, setOpenMessageModal] = useState(false);
 
   useEffect(() => {
     const handleOutsideClick = (event: MouseEvent) => {
       const target = event.target as HTMLElement;
-      const dropdown = document.getElementById(`settings-dropdown-${message.id}`);
+      const dropdown = document.getElementById(`settings-dropdown-${mensagem.id}`);
 
       if (dropdown && !dropdown.contains(target)) {
         setOpenSettings(false);
@@ -29,7 +29,7 @@ const MessageItem: FC<MessageItemProps> = ({ message }) => {
     return () => {
       document.removeEventListener("mousedown", handleOutsideClick);
     };
-  }, [message.id]);
+  }, [mensagem.id]);
 
   const queryClient = useQueryClient();
   return (
@@ -38,20 +38,20 @@ const MessageItem: FC<MessageItemProps> = ({ message }) => {
         <div className="details">
           <h4 className="mb-2 pb-2 text-2xl font-semibold tracking-tight text-ct-green-hacker">
             $User:&nbsp;
-            {message.nome.length > 40
-              ? message.nome.substring(0, 40) + "..."
-              : message.nome}
+            {mensagem.nome.length > 40
+              ? mensagem.nome.substring(0, 40) + "..."
+              : mensagem.nome}
           </h4>
           <p className="mb-3 font-normal text-ct-green-hacker">
           $Message:&nbsp;
-            {message.mensagem.length > 210
-              ? message.mensagem.substring(0, 210) + "..."
-              : message.mensagem}
+            {mensagem.mensagem.length > 210
+              ? mensagem.mensagem.substring(0, 210) + "..."
+              : mensagem.mensagem}
           </p>
         </div>
         <div className="relative border-t border-black flex justify-between items-center">
           <span className="text-ct-green-hacker text-sm">
-            {format(parseISO(String(message.data)), "PPP")}
+            {format(parseISO(String(mensagem.data)), "PPP")}
           </span>
         </div>
       </div>
@@ -59,7 +59,6 @@ const MessageItem: FC<MessageItemProps> = ({ message }) => {
         openMessageModal={openMessageModal}
         setOpenMessageModal={setOpenMessageModal}
       >
-        {/* <UpdateNote note={message} setOpenNoteModal={setOpenNoteModal} /> */}
       </MessageModal>
     </>
   );

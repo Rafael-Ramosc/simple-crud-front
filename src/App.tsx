@@ -77,15 +77,15 @@ function AppContent() {
     queryKey: ["getMessages"],
     queryFn: () => getMessagesFn(),
     staleTime: 5 * 1000,
-    select: (data) => data.messages,
+    select: (data) => data.mensagem,
     onSuccess() {
       NProgress.done();
     },
     onError(error: any) {
       const resMessage =
-        error.response.data.message ||
+        error.response.data.mensagem ||
         error.response.data.detail ||
-        error.message ||
+        error.mensagem ||
         error.toString();
       toast(resMessage, {
         type: "error",
@@ -121,7 +121,7 @@ function AppContent() {
         {/* Note Items */}
 
         {messages?.map((message) => (
-          <MessageItem key={message.id} message={message} />
+          <MessageItem key={message.id} mensagem={message} />
         ))}
 
         {/* Create Note Modal */}
